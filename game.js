@@ -88,25 +88,25 @@ class MainScene extends Phaser.Scene {
         this.map.setScale(scale);
 
         // Устанавливаем границы мира на основе размеров карты
-        this.physics.world.setBounds(0, 0, this.map.width * scale, this.map.height * scale);
+        this.physics.world.setBounds(0, 20, this.map.width * scale, this.map.height * scale - 20);
     }
 
     createPlayer() {
-        this.player = this.physics.add.sprite(400, 300, 'character');
+        this.player = this.physics.add.sprite(620, 350, 'character');
         this.player.setSize(32, 20)
         this.player.setOffset(8, 40);
         // this.player.setBoundsRectangle(new Phaser.Geom.Rectangle(this.player.x, this.player.y, 10, 10));
-        this.debugGraphics = this.add.graphics();
-        this.debugGraphics.lineStyle(2, 0xff0000);
-        this.physics.world.on('worldstep', () => {
-            this.debugGraphics.clear();
-            this.debugGraphics.strokeRect(
-                this.player.body.x,
-                this.player.body.y,
-                this.player.body.width,
-                this.player.body.height
-            );
-        });
+        // this.debugGraphics = this.add.graphics();
+        // this.debugGraphics.lineStyle(2, 0xff0000);
+        // this.physics.world.on('worldstep', () => {
+        //     this.debugGraphics.clear();
+        //     this.debugGraphics.strokeRect(
+        //         this.player.body.x,
+        //         this.player.body.y,
+        //         this.player.body.width,
+        //         this.player.body.height
+        //     );
+        // });
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -149,32 +149,32 @@ class MainScene extends Phaser.Scene {
     createZones() {
         this.zones = [];
         const zonePositions = [
-            { x: 0, y: 0 },
-            { x: 0, y: 0 },
+            { x: 610, y: 240 },
+            { x: 800, y: 310 },
             { x: 430, y: 316 },
-            { x: 0, y: 0 },
-            { x: 0, y: 0 },
-            { x: 0, y: 0 },
-            { x: 0, y: 0 },
-            { x: 0, y: 0 },
-            { x: 0, y: 0 }
+            { x: 420, y: 436 },
+            { x: 600, y: 495 },
+            { x: 560, y: 40 },
+            { x: 955, y: 380 },
+            { x: 322, y: 170 },
+            { x: 700, y: 680 }
         ];
 
         const zoneSize = [
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
+            { w: 40, h: 30 },
+            { w: 40, h: 50 },
             { w: 15, h: 15 },
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
-            { w: 0, h: 0 },
+            { w: 25, h: 30 },
+            { w: 35, h: 35 },
+            { w: 30, h: 30 },
+            { w: 30, h: 30 },
+            { w: 30, h: 30 },
+            { w: 30, h: 30 },
         ];
 
-
+        // let z = 8
         zonePositions.forEach((pos, index) => {
-            let zone = this.add.zone(pos.x, pos.y, zoneSize[index].h, zoneSize[index].w).setOrigin(0, 0);
+            let zone = this.add.zone(pos.x, pos.y, zoneSize[index].w, zoneSize[index].h).setOrigin(0, 0);
             zone.zoneIndex = index + 1;
             this.zones.push(zone);
             this.originalZonePositions.push(pos);
@@ -182,17 +182,17 @@ class MainScene extends Phaser.Scene {
 
         this.physics.world.enable(this.zones);
 
-        this.debugGraphics2 = this.add.graphics();
-        this.debugGraphics2.lineStyle(2, 0xff0000);
-        this.physics.world.on('worldstep', () => {
-            this.debugGraphics2.clear();
-            this.debugGraphics2.strokeRect(
-                this.zones[2].x,
-                this.zones[2].y,
-                this.zones[2].width,
-                this.zones[2].height
-            );
-        });
+        // this.debugGraphics2 = this.add.graphics();
+        // this.debugGraphics2.lineStyle(2, 0xff0000);
+        // this.physics.world.on('worldstep', () => {
+        //     this.debugGraphics2.clear();
+        //     this.debugGraphics2.strokeRect(
+        //         this.zones[z].x,
+        //         this.zones[z].y,
+        //         this.zones[z].width,
+        //         this.zones[z].height
+        //     );
+        // });
     }
 
     createOverlays() {
@@ -329,9 +329,9 @@ class MainScene extends Phaser.Scene {
             }
         });
 
-        this.input.keyboard.on('keydown-C', () => {
-            console.log(this.player.x + " " + this.player.y)
-        });
+        // this.input.keyboard.on('keydown-C', () => {
+        //     console.log(this.player.x + " " + this.player.y)
+        // });
     }
 
     update() {
