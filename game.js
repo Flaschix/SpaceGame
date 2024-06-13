@@ -321,8 +321,11 @@ class MainScene extends Phaser.Scene {
                         alpha: 0,
                         duration: 500,
                         onComplete: () => {
-                            this.overlayImages[this.currentZoneIndex - 1].setVisible(false);
-                            this.closeButton.setVisible(false);
+                            try {
+                                this.overlayImages[this.currentZoneIndex - 1].setVisible(false);
+                                this.closeButton.setVisible(false);
+                            } catch (e) { }
+
                         }
                     });
                 }
